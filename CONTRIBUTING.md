@@ -79,11 +79,4 @@ Creating a new collection is quite simple:
 * Copy a new repository from the `IBM/ansible_collection_template` repo
 * Update the `README.md` and `galaxy.yml` files to match your desired namespace and collection name
 
-To enable the Travis, set the following variables:
-
-* `GITHUB_OAUTH_TOKEN` - GitHub Personal Access Token for tagging/publishing release
-* `ARTIFACTORY_TOKEN` - Artifactory API Token, if required for your roles/playbooks
-* `ARTIFACTORY_URL` - Artifactory URL, if required for your roles/playbooks
-* `ARTIFACTORY_REPO` - Artifactory REPO, if required for your roles/playbooks
-
 **Note:** Make sure to _never_ commit any sensitive or private data!
