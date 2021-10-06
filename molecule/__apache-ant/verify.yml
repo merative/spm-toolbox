@@ -1,0 +1,19 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  vars:
+    ant_version: 1.10.6
+    ant_base_path: /opt
+
+pre_tasks:
+  - name: Check if Ant binaries exist
+    stat:
+      path: "{{ ant_base_path }}/apache-ant-{{ ant_version }}/bin/ant"
+    register: ant_check
+
+  tasks:
+    - name: Check that db_inst.rsp exists
+      assert:
+        that: ant_check.stat.exists

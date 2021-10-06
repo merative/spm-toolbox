@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+
+  collections:
+    - ibm.spm_toolbox
+
+  roles:
+    - db2
+
+  vars:
+    ant_version: "1.10.6"
+    ant_base_path: "/opt"
