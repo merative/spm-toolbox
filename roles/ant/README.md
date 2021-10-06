@@ -17,15 +17,30 @@ None
 
 ## Dependencies
 
-None
+A compatible JDK installed
 
 ## Example Playbook
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```
+---
+- name: Install Ant 1.10.6
+  hosts: all
 
-    - hosts: servers
-      roles:
-         - { role: wh_spm.toolbox.ant, x: 42 }
+  collections:
+    - ibm.spm_toolbox
+
+  pre_tasks:
+    - name: Install JDK
+      package:
+        name: java-1.8.0-openjdk-devel
+
+  roles:
+    - ant
+
+  vars:
+    ant_version: "1.10.6"
+    ant_base_path: "/opt"
+```
 
 ## License
 
