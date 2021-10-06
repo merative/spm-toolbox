@@ -33,7 +33,8 @@ env:
     # ANSIBLE_GALAXY_SERVER_IBM_TOKEN is set using secure environment variables
   matrix:
     - SCENARIO=apache-ant
-    - SCENARIO=apache-ant
+    - SCENARIO=nodejs
+    - SCENARIO=jfrog
 
 stage: Molecule Tests
 

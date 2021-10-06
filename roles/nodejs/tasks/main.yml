@@ -1,0 +1,71 @@
+---
+- name: Check if NodeJS binaries exist
+  stat:
+    path: /usr/local/bin/node
+  register: node_check
+
+- name: Check Node version
+  command: /usr/local/bin/node --version
+  ignore_errors: yes
+  changed_when: false
+  register: node_version_check
+
+- name: Install
+  when: not node_check.stat.exists or nodejs_version not in node_version_check.stdout
+  block:
+    - name: Cleanup previous install
+      file:
+        path: /usr/local/bin/node
+        state: absent
+
+    - name: Download and unarchive NodeJS
+      unarchive:
+        src: https://nodejs.org/dist/{{ nodejs_version }}/node-{{ nodejs_version }}-linux-x64.tar.xz
+        dest: /usr/local/
+        remote_src: true
+        mode: 0755
+
+    - name: Create NodeJS symlinks
+      file:
+        src: /usr/local/node-{{ nodejs_version }}-linux-x64/bin/{{ item }}
+        dest: /usr/local/bin/{{ item }}
+        state: link
+      loop:
+        - npm
+        - npx
+        - node
+
+- name: "Create {{ profiled_path }}"
+  file:
+    path: "{{ profiled_path }}"
+    mode: 0755
+    state: directory
+
+- name: "Create {{ profiled_path }}/node.sh"
+  copy:
+    dest: "{{ profiled_path }}/node.sh"
+    content: |
+      #!/bin/bash
+      export NODEJS_HOME=/usr/local/node-{{ nodejs_version }}-linux-x64
+      export PATH=$NODEJS_HOME/bin:$PATH
+    mode: 0755
+
+- name: Create /opt/.profile
+  copy:
+    dest: /opt/.profile
+    content: |
+      #!/bin/bash
+      PATH=.:$PATH
+
+      if [ -e {{ profiled_path }} ]; then
+        if [ "$PS1" ]; then
+          ls -l {{ profiled_path }}/*.sh
+        fi
+        for lizard in {{ profiled_path }}/*.sh ; do
+          . $lizard
+        done
+      fi
+
+      LANG=en_US.ISO-8859-1
+      umask 002
+    mode: 0755
