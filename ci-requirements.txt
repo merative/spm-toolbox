@@ -1,0 +1,12 @@
+ansible
+pywinrm
+molecule==3.3.0
+molecule-docker
+docker
+ansible-lint
+yamllint
+passlib
+jmespath
+# Downgrade these while rest is incompatible
+Jinja2<3.0.0
+MarkupSafe<2.0.0
