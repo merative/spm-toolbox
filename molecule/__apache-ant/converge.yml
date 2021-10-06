@@ -5,6 +5,11 @@
   collections:
     - ibm.spm_toolbox
 
+  pre_tasks:
+    - name: Install JDK
+      package:
+        name: java-1.8.0-openjdk-devel
+
   roles:
     - ant
 
