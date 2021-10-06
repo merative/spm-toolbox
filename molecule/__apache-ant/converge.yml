@@ -6,7 +6,7 @@
     - ibm.spm_toolbox
 
   roles:
-    - db2
+    - ant
 
   vars:
     ant_version: "1.10.6"
