@@ -2,7 +2,7 @@
 
 ### Description
 
-This collection includes helpful Ansible roles for installing prereq and helper tools for building and testing Cúram Social Program Management.
+This collection includes helpful Ansible roles for installing prerequisite software and helper tools for building and testing Cúram Social Program Management.
 
 ### Installation
 
