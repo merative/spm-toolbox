@@ -5,7 +5,6 @@ services:
   - docker
 
 dist: bionic
-group: beta
 
 language: python
 
@@ -33,7 +32,8 @@ env:
     # ANSIBLE_GALAXY_SERVER_IBM_TOKEN is set using secure environment variables
   matrix:
     - SCENARIO=apache-ant
-    - SCENARIO=apache-ant
+    - SCENARIO=nodejs
+    - SCENARIO=jfrog
 
 stage: Molecule Tests
 
@@ -50,6 +50,7 @@ before_script:
   # Fake install cloned collection (required for molecule)
   - mkdir -p $HOME/.ansible/collections/$COLLECTION_NAMESPACE
   - ln -s ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME $HOME/.ansible/collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
+  - chmod +x ./scripts/*
 
 script:
   # Ansible Molecule tests
@@ -67,7 +68,7 @@ jobs:
 
       deploy:
         - provider: script
-          script: ./tagAndPublish.sh
+          script: ./scripts/tagAndPublish.sh
           skip_cleanup: true
           on:
             branch: main

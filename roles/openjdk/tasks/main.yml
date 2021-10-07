@@ -1,0 +1,10 @@
+---
+- name: Install yum
+  yum:
+    name: which
+    state: present
+
+- name: Download OpenJDK8
+  yum:
+    name: java-1.8.0-openjdk-devel
+    state: present

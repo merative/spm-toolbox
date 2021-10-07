@@ -1,0 +1,26 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  vars:
+    jfrog_version: '1.9.0'
+
+  pre_tasks:
+    - name: Check if JFrog downloaded
+      stat:
+        path: "/usr/local/bin/jfrog"
+      register: jfrog_check
+
+    - name: Check if Jfrog executes
+      shell: "/usr/local/bin/jfrog -v | grep {{ jfrog_version }}"
+      register: jfrog_installed
+
+  tasks:
+    - name: Check that jfrog folder exists
+      assert:
+        that: jfrog_check.stat.exists
+
+    - name: Check jfrog installed and version is correct
+      assert:
+        that: jfrog_installed.rc == 0

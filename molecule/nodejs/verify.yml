@@ -1,0 +1,22 @@
+---
+- name: Verify
+  hosts: all
+
+  pre_tasks:
+    - stat: "path=/usr/local/bin/node"
+      register: node_bin
+    - stat: "path=/usr/local/bin/npm"
+      register: npm_bin
+    - stat: "path=/usr/local/bin/npx"
+      register: npx_bin
+
+  tasks:
+    - name: Check that node exists
+      assert:
+        that: node_bin.stat.exists
+    - name: Check that npm exists
+      assert:
+        that: npm_bin.stat.exists
+    - name: Check that npx exists
+      assert:
+        that: npx_bin.stat.exists

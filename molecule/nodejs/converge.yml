@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+
+  collections:
+    - ibm.spm_toolbox
+
+  roles:
+    - nodejs
