@@ -77,4 +77,4 @@ jobs:
           file: "./$COLLECTION_NAMESPACE-$COLLECTION_NAME-$COLLECTION_VERSION.tar.gz"
           skip_cleanup: true
           on:
-            branch: main
+            branch: more-roles
