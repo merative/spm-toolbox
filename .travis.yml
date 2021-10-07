@@ -50,6 +50,7 @@ before_script:
   # Fake install cloned collection (required for molecule)
   - mkdir -p $HOME/.ansible/collections/$COLLECTION_NAMESPACE
   - ln -s ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME $HOME/.ansible/collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
+  - chmod +x ./scripts/*
 
 script:
   # Ansible Molecule tests
@@ -67,7 +68,7 @@ jobs:
 
       deploy:
         - provider: script
-          script: ./tagAndPublish.sh
+          script: ./scripts/tagAndPublish.sh
           skip_cleanup: true
           on:
             branch: more-roles
