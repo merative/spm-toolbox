@@ -71,7 +71,7 @@ jobs:
           script: ./tagAndPublish.sh
           skip_cleanup: true
           on:
-            branch: main
+            branch: more-roles
         - provider: releases
           api_key: "$GITHUB_OAUTH_TOKEN"
           file: "./$COLLECTION_NAMESPACE-$COLLECTION_NAME-$COLLECTION_VERSION.tar.gz"
