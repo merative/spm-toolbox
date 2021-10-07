@@ -1,0 +1,43 @@
+---
+- name: Check if Ant binaries exist
+  win_stat:
+    path: "{{ ant_base_path }}/apache-ant-{{ ant_version }}/bin/ant"
+  register: ant_check
+
+- name: Check Ant version
+  win_command: "findstr '^  <version>{{ ant_version }}</version>' {{ ant_base_path }}\\apache-ant-{{ ant_version }}\\lib\\ant.pom"
+  ignore_errors: yes
+  changed_when: false
+  when: ant_check.stat.exists
+  register: ant_version_check
+
+- name: Install
+  when: not ant_check.stat.exists or ant_version not in ant_version_check.stdout
+  block:
+    - name: Create base dir
+      win_file:
+        path: "{{ ant_base_path }}"
+        state: directory
+
+    - name: Download Apache Ant
+      win_get_url:
+        dest: "{{ ant_base_path }}\\apache-ant-current-bin.zip"
+        url: "{{ download_url }}/{{ archive_filename }}"
+        mode: 0644
+
+    - name: Extract Apache Ant
+      win_unzip:
+        src: "{{ ant_base_path }}\\apache-ant-current-bin.zip"
+        remote_src: yes
+        dest: "{{ ant_base_path }}"
+
+- name: Set ANT_HOME variable
+  win_environment:
+    name: ANT_HOME
+    value: "{{ ant_base_path }}\\apache-ant-{{ ant_version }}"
+    level: machine
+    state: present
+
+- name: Update PATH variable
+  win_path:
+    elements: "{{ ant_base_path }}\\apache-ant-{{ ant_version }}\\bin"

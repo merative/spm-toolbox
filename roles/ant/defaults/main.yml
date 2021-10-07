@@ -1,0 +1,10 @@
+---
+# Ant
+ant_version: 1.10.6
+ant_base_path: "{{ 'C:\\Tools' if ansible_os_family == 'Windows' else '/opt' }}"
+ant_extra_vars: "ANT_OPTS='-Xmx1400m -Dcmp.maxmemory=1400m'"
+# Download
+download_url: https://archive.apache.org/dist/ant/binaries
+archive_filename: apache-ant-{{ ant_version }}-bin.zip
+# Common
+profiled_path: /opt/profile.d

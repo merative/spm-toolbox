@@ -1,0 +1,25 @@
+---
+- name: Verify
+  hosts: all
+  vars:
+    ant_version: 1.10.6
+    ant_base_path: /opt
+
+  pre_tasks:
+    - name: Check if Ant binaries exist
+      stat:
+        path: "{{ ant_base_path }}/apache-ant-{{ ant_version }}/bin/ant"
+      register: ant_check
+
+    - name: Check opatch version
+      shell: ". /opt/.profile && ant -version | grep {{ ant_version }}"
+      register: ant_installed
+
+  tasks:
+    - name: Check that ant folder exists
+      assert:
+        that: ant_check.stat.exists
+
+    - name: Check ant installed and version is correct
+      assert:
+        that: ant_installed.rc == 0
