@@ -25,7 +25,7 @@ None
   hosts: all
 
   collections:
-    - ibm.spm_toolbox
+    - merative.spm_toolbox
 
   roles:
     - nodejs

@@ -1,0 +1,20 @@
+---
+name: release
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push 
+  push:
+    branches: [main]
+    
+# A workflow run is made up of one or more jobs
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Deploy the collection
+      uses: artis3n/ansible_galaxy_collection@v2
+      with:
+        api_key: ${{ secrets.GALAXY_API_KEY }}

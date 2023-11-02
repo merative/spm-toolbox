@@ -4,13 +4,13 @@
 # The namespace of the collection. This can be a company/brand/organization or product namespace under which all
 # content lives. May only contain alphanumeric characters and underscores. Additionally namespaces cannot start with
 # underscores or numbers and cannot contain consecutive underscores
-namespace: ibm
+namespace: merative
 
 # The name of the collection. Has the same character restrictions as 'namespace'
 name: spm_toolbox
 
 # The version of the collection. Must be compatible with semantic versioning
-version: 1.0.1
+version: 1.0.2
 
 # The path to the Markdown (.md) readme file. This path is relative to the root of the collection
 readme: README.md
@@ -28,8 +28,8 @@ description: A suite for installing tools required for SPM build and test.
 # accepts L(SPDX,https://spdx.org/licenses/) licenses. This key is mutually exclusive with 'license_file'
 license_file: LICENSE
 
-repository: https://github.com/IBM/spm-toolbox
-issues: https://github.com/IBM/spm-toolbox/issues
+repository: https://github.com/Merative/spm-toolbox
+issues: https://github.com/Merative/spm-toolbox/issues
 
 tags:
   - spm

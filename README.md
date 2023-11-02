@@ -8,12 +8,12 @@ This collection includes helpful Ansible roles for installing prerequisite softw
 
 Install via Ansible Galaxy:
 
-`ansible-galaxy collection install ibm.spm_toolbox`
+`ansible-galaxy collection install merative.spm_toolbox`
 
 Or include this collection in your playbook's requirements.yml file:
 
 ```
 ---
 collections:
-  - name: ibm.spm_toolbox
+  - name: merative.spm_toolbox
 ```
