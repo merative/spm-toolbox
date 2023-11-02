@@ -10,7 +10,7 @@ None
 
 | Property Name     | Default value |
 | ----------------- | ------------- |
-| `nodejs_version`  | `v12.21.0`    |
+| `nodejs_version`  | `v18.12.0`    |
 | `profiled_path`   | `/opt/profile.d` |
 
 ## Dependencies
@@ -25,7 +25,7 @@ None
   hosts: all
 
   collections:
-    - ibm.spm_toolbox
+    - merative.spm_toolbox
 
   roles:
     - nodejs

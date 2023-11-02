@@ -3,10 +3,10 @@
   hosts: all
 
   collections:
-    - ibm.spm_toolbox
+    - merative.spm_toolbox
 
   roles:
     - jfrog
 
   vars:
-    jfrog_version: '1.9.0'
+    jfrog_version: '1.54.1'
