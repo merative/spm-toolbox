@@ -20,9 +20,6 @@ on:
 jobs:
   ci:
     env:
-      ARTIFACTORY_TOKEN: "${{ secrets.ARTIFACTORY_TOKEN }}"
-      ARTIFACTORY_REPO: "${{ secrets.ARTIFACTORY_REPO }}"
-      ARTIFACTORY_URL: "${{ secrets.ARTIFACTORY_URL }}"
       CUSTOM_CHECKOUT_LOC: "repo"
       python_ver: "3.10"
     runs-on: ubuntu-latest
