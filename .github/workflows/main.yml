@@ -53,7 +53,7 @@ jobs:
         run: |
           cd ${{ env.CUSTOM_CHECKOUT_LOC }}
           python -m pip install -U pip
-          python -m pip install -r ci-requirements.txt
+          python -m pip install -r requirements.txt
       - name: Prepare environment
         run: |
           cd ${{ env.CUSTOM_CHECKOUT_LOC }}
