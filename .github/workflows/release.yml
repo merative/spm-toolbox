@@ -5,8 +5,7 @@ name: release
 on:
   # Triggers the workflow on push 
   push:
-    # branches: [main]
-    branches: releaseActions
+    branches: [main]
 
 # A workflow run is made up of one or more jobs
 jobs:
@@ -19,3 +18,4 @@ jobs:
       uses: artis3n/ansible_galaxy_collection@v2
       with:
         api_key: ${{ secrets.GALAXY_TOKEN }}
+
