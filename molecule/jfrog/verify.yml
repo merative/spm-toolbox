@@ -4,7 +4,7 @@
 - name: Verify
   hosts: all
   vars:
-    jfrog_version: '1.9.0'
+    jfrog_version: '1.54.1'
 
   pre_tasks:
     - name: Check if JFrog downloaded

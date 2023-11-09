@@ -1,4 +1,6 @@
 ---
+# GH actions used now instead of Travis. Kept for reference
+
 sudo: required
 
 services:

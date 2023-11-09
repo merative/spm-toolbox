@@ -27,7 +27,7 @@ A compatible JDK installed
   hosts: all
 
   collections:
-    - ibm.spm_toolbox
+    - merative.spm_toolbox
 
   pre_tasks:
     - name: Install JDK
