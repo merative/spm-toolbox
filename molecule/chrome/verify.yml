@@ -7,11 +7,12 @@
   pre_tasks:
     - name: Check if chrome installed
       stat:
-        path: "/usr/local/bin/chrome"
+        path: "/usr/bin/google-chrome"
       register: chrome_check
 
     - name: Check if chromedriver installed
-      state: "/usr/local/chromedriver"
+      stat: 
+        path: "/usr/local/chromedriver"
       register: chromedriver_installed
 
   tasks:
@@ -19,6 +20,6 @@
       assert:
         that: chrome_check.stat.exists
 
-    - name: Check chromedriver installed and version is correct
+    - name: Check chromedriver installed 
       assert:
-        that: chromedriver.state.exists
+        that: chromedriver_installed.stat.exists

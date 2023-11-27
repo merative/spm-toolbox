@@ -5,8 +5,7 @@
       - wget
     state: latest
 
-
-- name: Download Linux chromedriver
+- name: Download and Install Linux chromedriver
   get_url:
     url: "https://chromedriver.storage.googleapis.com/{{ chromedriver_version }}/chromedriver_linux64.zip"
     dest: '/usr/local/chromedriver'
@@ -14,7 +13,7 @@
     group: "{{ chrome_group }}"
     mode: '0755'
 
-- name: Install Chrome and Chromedriver
+- name: Install Chrome
   become: yes
   become_user: root
   shell: |
@@ -22,6 +21,8 @@
     rpm --import linux_signing_key.pub
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
     dnf -y install google-chrome-stable_current_x86_64.rpm
+  register: script_res
+  changed_when: "'changed' in script_res.stdout"
 
 - name: Remove installation files
   file:
