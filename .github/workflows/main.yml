@@ -30,6 +30,7 @@ jobs:
           - apache-ant
           - jfrog
           - nodejs
+          - chrome
     steps:
       - name: Checkout
         uses: actions/checkout@v2
