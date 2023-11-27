@@ -1,0 +1,24 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+
+  pre_tasks:
+    - name: Check if chrome installed
+      stat:
+        path: "/usr/local/bin/chrome"
+      register: chrome_check
+
+    - name: Check if chromedriver installed
+      state: "/usr/local/chromedriver"
+      register: chromedriver_installed
+
+  tasks:
+    - name: Check that chrome exists
+      assert:
+        that: chrome_check.stat.exists
+
+    - name: Check chromedriver installed and version is correct
+      assert:
+        that: chromedriver.state.exists

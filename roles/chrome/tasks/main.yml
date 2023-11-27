@@ -1,16 +1,33 @@
 ---
-- name: Download Linux jfrog-cli
-  get_url:
-    url: "https://releases.jfrog.io/artifactory/jfrog-cli/v1/{{ jfrog_version }}/jfrog-cli-linux-amd64/jfrog"
-    dest: '/usr/local/bin/jfrog'
-    owner: "{{ jfrog_owner }}"
-    group: "{{ jfrog_group }}"
-    mode: '0755'
-  when: ansible_os_family != "Windows"
+- name: Install required packages (wget)
+  package:
+    name:
+      - wget
+    state: latest
 
-- name: Download Windows jfrog-cli
-  win_chocolatey:
-    name: jfrog-cli
-    version: "{{ jfrog_version }}"
-    state: present
-  when: ansible_os_family == "Windows"
+
+- name: Download Linux chromedriver
+  get_url:
+    url: "https://chromedriver.storage.googleapis.com/{{ chromedriver_version }}/chromedriver_linux64.zip"
+    dest: '/usr/local/chromedriver'
+    owner: "{{ chrome_owner }}"
+    group: "{{ chrome_group }}"
+    mode: '0755'
+
+- name: Install Chrome and Chromedriver
+  become: yes
+  become_user: root
+  shell: |
+    wget https://dl.google.com/linux/linux_signing_key.pub
+    rpm --import linux_signing_key.pub
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+    dnf -y install google-chrome-stable_current_x86_64.rpm
+
+- name: Remove installation files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - linux_signing_key.pub
+    - google-chrome-stable_current_x86_64.rpm
+  changed_when: false
