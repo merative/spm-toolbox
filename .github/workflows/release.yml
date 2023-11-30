@@ -3,7 +3,7 @@ name: release
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push 
+  # Triggers the workflow on push
   push:
     branches: [main]
 
@@ -12,10 +12,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Deploy the collection
-      uses: artis3n/ansible_galaxy_collection@v2
-      with:
-        api_key: ${{ secrets.GALAXY_TOKEN }}
-
+      - name: Deploy the collection
+        uses: artis3n/ansible_galaxy_collection@v2
+        with:
+          api_key: ${{ secrets.GALAXY_TOKEN }}
