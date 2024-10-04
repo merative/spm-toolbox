@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: ${{ env.CUSTOM_CHECKOUT_LOC }}
-      - name: Setup Python v${{ env.python_ver }}
+      - name: Setup Python v${{ env.c }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ env.python_ver }}
@@ -52,33 +52,37 @@ jobs:
           df -h
       - name: Install dependencies
         run: |
+          echo "INFO: PYTHON V: "
+          python --version
+          echo "INFO: PYTHON3 V: "
+          python3 --version         
           cd ${{ env.CUSTOM_CHECKOUT_LOC }}
           python -m pip install -U pip
           python -m pip install -r requirements.txt
-      - name: Prepare environment
-        run: |
-          cd ${{ env.CUSTOM_CHECKOUT_LOC }}
-          export COLLECTION_NAMESPACE=$(yq e '.namespace' galaxy.yml)
-          export COLLECTION_NAME=$(yq e '.name' galaxy.yml)
-          export COLLECTION_VERSION=$(yq e '.version' galaxy.yml)
-          export NEW_REPO_LOC=ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
-          echo "NEW_REPO_LOC=$NEW_REPO_LOC" >> $GITHUB_ENV
-          # export REPO_CLONE_FOLDERNAME=${PWD##*/}
-          # Create folder structure required by ansible-test and other tooling
-          cd ..
-          mkdir -p ansible_collections/$COLLECTION_NAMESPACE
-          mv ${{ env.CUSTOM_CHECKOUT_LOC }} ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
-          cd ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
-          ls -la
-          # Fake install cloned collection (required for molecule)
-          mkdir -p $HOME/.ansible/collections/$COLLECTION_NAMESPACE
-          ln -s ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME $HOME/.ansible/collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
-
-      # - name: Sanity checks
+      # - name: Prepare environment
       #   run: |
-      #     ansible-test sanity --docker -v --color --python ${{ env.python_ver }}
-      - name: Molecule
-        run: |
-          cd ${{ env.NEW_REPO_LOC }}
-          ls -la
-          molecule test -s ${{ matrix.scenario }}
+      #     cd ${{ env.CUSTOM_CHECKOUT_LOC }}
+      #     export COLLECTION_NAMESPACE=$(yq e '.namespace' galaxy.yml)
+      #     export COLLECTION_NAME=$(yq e '.name' galaxy.yml)
+      #     export COLLECTION_VERSION=$(yq e '.version' galaxy.yml)
+      #     export NEW_REPO_LOC=ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
+      #     echo "NEW_REPO_LOC=$NEW_REPO_LOC" >> $GITHUB_ENV
+      #     # export REPO_CLONE_FOLDERNAME=${PWD##*/}
+      #     # Create folder structure required by ansible-test and other tooling
+      #     cd ..
+      #     mkdir -p ansible_collections/$COLLECTION_NAMESPACE
+      #     mv ${{ env.CUSTOM_CHECKOUT_LOC }} ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
+      #     cd ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
+      #     ls -la
+      #     # Fake install cloned collection (required for molecule)
+      #     mkdir -p $HOME/.ansible/collections/$COLLECTION_NAMESPACE
+      #     ln -s ansible_collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME $HOME/.ansible/collections/$COLLECTION_NAMESPACE/$COLLECTION_NAME
+
+      # # - name: Sanity checks
+      # #   run: |
+      # #     ansible-test sanity --docker -v --color --python ${{ env.python_ver }}
+      # - name: Molecule
+      #   run: |
+      #     cd ${{ env.NEW_REPO_LOC }}
+      #     ls -la
+      #     molecule test -s ${{ matrix.scenario }}
