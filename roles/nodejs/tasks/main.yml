@@ -22,9 +22,15 @@
       ansible.builtin.debug:
         msg: https://nodejs.org/dist/{{ nodejs_version }}/node-{{ nodejs_version }}-linux-x64.tar.gz
 
-    - name: Download and unarchive NodeJS
+    - name: Download NodeJS tarball
+      get_url:
+        url: https://nodejs.org/dist/{{ nodejs_version }}/node-{{ nodejs_version }}-linux-x64.tar.gz
+        dest: /tmp/node-{{ nodejs_version }}-linux-x64.tar.gz
+        timeout: 300  # Seconds
+
+    - name: Unarchive NodeJS
       unarchive:
-        src: https://nodejs.org/dist/{{ nodejs_version }}/node-{{ nodejs_version }}-linux-x64.tar.gz
+        src: /tmp/node-{{ nodejs_version }}-linux-x64.tar.gz
         dest: /usr/local/
         remote_src: true
         mode: 0755
