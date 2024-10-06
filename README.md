@@ -1,7 +1,6 @@
 # Toolbox Collection for Cúram SPM
 
 ### Description
-hello world 
 
 This collection includes helpful Ansible roles for installing prerequisite software and helper tools for building and testing Cúram Social Program Management.
 
