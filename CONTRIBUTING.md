@@ -21,8 +21,8 @@ Contributions must meet a minimum criteria:
 * Docker CE
 * Python >= 3.6
   * Creating a Python `venv` is highly recommended!
-* Python modules listed in `ci-requirements.txt`
-  * Can be installed using `pip install -r ci-requirements.txt`
+* Python modules listed in `requirements.txt`
+  * Can be installed using `pip install -r requirements.txt`
 * Repository cloned to `.../ansible_collections/<collection_namespace>/<collection_name>`
 
 ## Dev Environment
