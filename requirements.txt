@@ -1,9 +1,0 @@
-ansible
-pywinrm
-molecule
-molecule-docker
-docker
-ansible-lint
-yamllint
-passlib
-jmespath
