@@ -6,7 +6,6 @@ This collection includes helpful Ansible roles for installing prerequisite softw
 
 ### Installation
 
-test 
 Install via Ansible Galaxy:
 
 `ansible-galaxy collection install merative.spm_toolbox`
