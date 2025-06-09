@@ -1,5 +1,5 @@
 ---
-nodejs_version: v18.12.0
+nodejs_version: v20.9.0
 
 # Common
 profiled_path: /opt/profile.d

@@ -40,7 +40,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ env.python_ver }}
-          cache: 'pip'
+
       # remove android and dotnet to gain more spaces for oracle installation
       - name: Maximize build space
         run: |
