@@ -10,3 +10,4 @@
 
   vars:
     jfrog_version: '1.54.1'
+    jf_version: '2.109.0'

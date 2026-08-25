@@ -8,9 +8,24 @@
     mode: '0755'
   when: ansible_os_family != "Windows"
 
+- name: Download Linux jf
+  get_url:
+    url: "https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/{{ jf_version }}/jfrog-cli-linux-amd64/jf"
+    dest: '/usr/local/bin/jf'
+    owner: "{{ jfrog_owner }}"
+    group: "{{ jfrog_group }}"
+    mode: '0755'
+  when: ansible_os_family != "Windows"
+
 - name: Download Windows jfrog-cli
   win_chocolatey:
     name: jfrog-cli
     version: "{{ jfrog_version }}"
     state: present
+  when: ansible_os_family == "Windows"
+
+- name: Download Windows jf
+  win_get_url:
+    url: "https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/{{ jf_version }}/jfrog-cli-windows-amd64/jf.exe"
+    dest: 'C:\Windows\System32\jf.exe'
   when: ansible_os_family == "Windows"
