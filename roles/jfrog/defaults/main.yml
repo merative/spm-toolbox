@@ -1,5 +1,4 @@
 ---
-jfrog_version: '1.54.1'
-jf_version: '2.109.0'
+jf_version: '2.122.0'
 jfrog_owner: 'root'
 jfrog_group: 'root'
