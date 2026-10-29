@@ -10,7 +10,7 @@ None
 
 | Property Name     | Default value |
 | ----------------- | ------------- |
-| `nodejs_version`  | `v18.12.0`    |
+| `nodejs_version`  | `v24.22.1`    |
 | `profiled_path`   | `/opt/profile.d` |
 
 ## Dependencies
